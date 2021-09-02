@@ -307,8 +307,8 @@ if __name__ == "__main__":
             play.play()
             play()
             play.wait_for_playback()
+        finally:
             styling.screen.clear()
-        except:
             print("Quitting...", flush=True)
             sys.exit()
     elif arg.quick_audio or arg.quick_video:
