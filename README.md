@@ -24,7 +24,7 @@ There's no pre-build binaries avaliable yet, but it's not that hard to build you
 Requires to have **Python 3.8** and up. Open an issue if it works in older python version.
 
 ## Libraries required
-You need to have libraries `ffmpeg`, `mpv`, `youtube-dl` and `python3` installed.
+You need to have libraries `ffmpeg`, `mpv`, `youtube-dl`, `chafa` and `python3` installed.
 
 ### Linux
 Please install required libraries above (not `*-dev`) with your package manager.
