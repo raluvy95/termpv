@@ -1,8 +1,8 @@
 from youtube_dl import YoutubeDL
 from youtube_dl.utils import DownloadError
-from utils import from_template_info, status
+from src.utils import from_template_info, status
 import os
-import styling
+from src import styling
 
 YDL_OPTIONS = {'quiet': True}
 

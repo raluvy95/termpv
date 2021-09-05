@@ -1,9 +1,8 @@
-import mpv
-from utils import num_to_time, status
+from src import mpv, styling
+from src.utils import num_to_time, status
 import sys
-import styling
 import time
-from style import Style
+from src.style import Style
 import os
 import json
 import subprocess

@@ -1,5 +1,5 @@
 from typing import List
-from style import Style
+from src.style import Style
 from datetime import datetime, timedelta
 import os
 from subprocess import check_output

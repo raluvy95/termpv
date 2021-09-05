@@ -1,11 +1,11 @@
 from time import sleep
-from tube import get, search_for, get_print, download
-import utils
-import styling
-from style import Style
+from src.tube import get, search_for, get_print, download
+from src import styling, utils
+from src.style import Style
 import sys
 from subprocess import check_output
 from youtube_dl import version
+from src.args import get_args
 
 class MainTube:
     def __init__(self, search=None, quick_aud=None, quick_vid=None) -> None:
@@ -31,7 +31,7 @@ class MainTube:
     def info(self):
         self.is_on_about = True
         try:
-            with open("../logo.txt") as f:
+            with open("logo.txt") as f:
                 print(f.read(), flush=True)
                 f.close()
         except:
@@ -46,13 +46,15 @@ class MainTube:
         print(f"""{Style.BOLD}{active_obj['title']}{Style.END}
 by {active_obj['author']}
 """)
-        from player import Player
+        from src.player import Player
         try:
             player = Player(f"https://youtube.com/watch?v={active_obj['id']}", active_obj['duration'],
                             video_only=video_only)
             player.play()
             player()
             player.wait_for_playback()
+        except:
+            pass
         finally:
             styling.screen.clear()
             print("Loading...", flush=True)
@@ -249,7 +251,7 @@ def welcome(arg, version_only=False):
         "ffmpeg": ffmpeg
     }
     if arg.intro:
-        with open("../logo.txt") as f:
+        with open("logo.txt") as f:
             FORMAT = {
                 "@bold": "\033[1m",
                 "@end": "\033[0m"
@@ -293,8 +295,7 @@ def welcome(arg, version_only=False):
         sys.exit(0)
                 
 
-if __name__ == "__main__":
-    from args import get_args
+def start():
     arg = get_args()
     if arg.search:
         run(" ".join(arg.search), quick_vid=arg.quick_video,
