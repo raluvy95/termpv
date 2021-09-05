@@ -20,7 +20,8 @@ The front-end terminal for mpv and youtube-dl written in Python
 * [Credits](#Credits)
 
 # Installing
-There's no pre-build binaries avaliable yet, but it's not that hard to build yourself<br>
+We only have Linux x86_64 in [releases](https://github.com/raluvy95/termpv/releases)<br>
+If you're using other OS or arhitecture, you need to build yourself.<br><br>
 Requires to have **Python 3.8** and up. Open an issue if it works in older python version.
 
 ## Libraries required
