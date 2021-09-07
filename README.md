@@ -34,8 +34,8 @@ Please install required libraries above (not `*-dev`) with your package manager.
 I didn't test other OS except for Linux. I would be very appreciate if anyone can test it.
 
 # Start
-Clone this repository, go to the directory `src` and run with `python3 main.py`<br>
-You can use with arguments for additional actions, see `main.py --help` for more info.
+Clone this repository and run with `python3 cli.py` (make sure you installed libraries above)<br>
+You can use with arguments for additional actions, see `cli.py --help` for more info.
 
 # Configuration
 We currently don't have custom configuration yet. Why not edit python file?
