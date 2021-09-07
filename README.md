@@ -17,6 +17,7 @@ The front-end terminal for mpv and youtube-dl written in Python
 * [Configuration](#Configuration)
 * [NOTE](#NOTE)
 * [TODO](#TODO)
+* [Troubleshooting](#Troubleshooting)
 * [Credits](#Credits)
 
 # Installing
@@ -47,6 +48,13 @@ This project is in working progress which may not 100% working fine. Please fill
 * Improvements in Player
 * Custom configuration
 * ???
+
+# Troubleshooting
+#### "FileNotFoundError: [Errno2] No such file or directory: 'mpv'" or similar error
+You didn't installed required libraries above.
+#### KeyError: 'channel'
+You have older youtube-dl version, please upgrade it with `pip` or other package manager you use.
+
 
 # Credits
 
