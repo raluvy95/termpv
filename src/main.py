@@ -18,7 +18,7 @@ LOGO = """
 @boldThe Terminal based front-end for mpv and youtube-dl@end
 """
 
-TERMPV_VERSION = "0.1.0"
+TERMPV_VERSION = "0.1.1"
 
 class MainTube:
     def __init__(self, search=None, quick_aud=None, quick_vid=None) -> None:
