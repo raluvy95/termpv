@@ -105,7 +105,8 @@ class screen():
 			115, # s - Search
 			113, # q - Exit
 			98,  # b - Back
-			100  # d - Download
+			100, # d - Download
+			105  # i - About
 		]
 		is_char = False
 		is_enter = False

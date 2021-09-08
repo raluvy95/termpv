@@ -7,6 +7,19 @@ from subprocess import check_output
 from youtube_dl import version
 from src.args import get_args
 
+LOGO = """
+      ______
+     /_  __/__  _________ ___  ____ _   __
+      / / / _ \/ ___/ __ `__ \/ __ \ | / /
+     / / /  __/ /  / / / / / / /_/ / |/ / 
+    /_/  \___/_/  /_/ /_/ /_/ .___/|___/  
+                           /_/            
+
+@boldThe Terminal based front-end for mpv and youtube-dl@end
+"""
+
+TERMPV_VERSION = "0.1.0"
+
 class MainTube:
     def __init__(self, search=None, quick_aud=None, quick_vid=None) -> None:
         # Some variables
@@ -29,16 +42,11 @@ class MainTube:
         self.search(search)
 
     def info(self):
-        self.is_on_about = True
-        try:
-            with open("logo.txt") as f:
-                print(f.read(), flush=True)
-                f.close()
-        except:
-            pass
-        print("A terminal based front-end for mpv and youtube-dl.", flush=True)
-        print("Feel free to use, modify or share this program under GPLv3 license.", flush=True)
-        utils.status(" Press %boldq%end to return.")
+        if not self.is_on_about and not self.is_on_info_page:
+            styling.screen.clear()
+            print(LOGO, flush=True)
+            print("Feel free to use, modify or share this program under GPLv3 license.", flush=True)
+            utils.status(" Press %boldq%end to return.")
 
     def play(self, active_obj, video_only=False):
         self.quick = False
@@ -70,7 +78,11 @@ by {active_obj['author']}
                 else:
                     pass
             elif arrow == 'q':
-                break
+                if self.is_on_about and not self.is_on_info_page:
+                    self.is_on_about = False
+                    self.refresh()
+                else:
+                    break
             elif arrow == styling.Arrow.UP:
                 if not self.is_on_info_page:
                     self.go("up")
@@ -137,6 +149,11 @@ by {active_obj['author']}
                             "Download cancelled! Returning to info page...", flush=True)
                         sleep(2)
                         get_print(active_obj['id'])
+            elif arrow == "i":
+                if not self.is_on_info_page and not self.is_on_prompt:
+                    self.is_on_about = True
+                    self.info()
+
 
     def __get_active_obj(self):
         for obj in self.cached:
@@ -245,25 +262,23 @@ def welcome(arg, version_only=False):
         styling.screen.clear()
     mpv, ffmpeg = get_versions()
     VERSIONS = {
-        "termpv": "0.1.0",
+        "termpv": TERMPV_VERSION,
         "youtube-dl": version.__version__,
         "mpv": mpv,
         "ffmpeg": ffmpeg
     }
     if arg.intro:
-        with open("logo.txt") as f:
-            FORMAT = {
-                "@bold": "\033[1m",
-                "@end": "\033[0m"
-            }
-            lines = f.read()
-            for k, v in FORMAT.items():
-                lines = lines.replace(k, v)
-            for _i in range(len(lines)):
-                sys.stdout.write(lines[_i])
-                sys.stdout.flush()
-                sleep(0.005)
-            f.close()
+        FORMAT = {
+            "@bold": "\033[1m",
+            "@end": "\033[0m"
+        }
+        lines = LOGO
+        for k, v in FORMAT.items():
+            lines = lines.replace(k, v)
+        for _i in range(len(lines)):
+            sys.stdout.write(lines[_i])
+            sys.stdout.flush()
+            sleep(0.005)
         sleep(2)
     for k, v in VERSIONS.items():
         print(f"Using {k} - version {v}")
@@ -302,12 +317,14 @@ def start():
             quick_aud=arg.quick_audio)
     elif arg.file:
         styling.screen.clear()
-        from player import Player
+        from src.player import Player
         play = Player(" ".join(arg.file), file_only=True)
         try:
             play.play()
             play()
             play.wait_for_playback()
+        except:
+            pass
         finally:
             styling.screen.clear()
             print("Quitting...", flush=True)

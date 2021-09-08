@@ -114,7 +114,7 @@ def status(info=None):
         "%end": Style.END
     }
     if not info:
-        info = " %boldup/down%end - Navigate your results | %boldenter%end - Info | %bolds%end - Search | %boldq%end - Exit "
+        info = " %boldup/down%end - Navigate your results | %boldenter%end - Info | %bolds%end - Search | %boldq%end - Exit | %boldi%end - Info "
     for k, v in formats.items():
         info = info.replace(k, v)
     match_count = re.findall("(%bold|%end)", info)
